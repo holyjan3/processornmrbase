@@ -29,7 +29,7 @@ import org.eclipse.chemclipse.nmr.processor.settings.IProcessorSettings;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.IProgressMonitor;
 
-import net.openchrom.nmr.processing.supplier.base.settings.FourierTransformationSettings;
+import net.openchrom.nmr.processing.supplier.base.settings.RemoveDigitalFilterSettings;
 
 public class RemoveDigitalFilterProcessor extends AbstractScanProcessor implements IScanProcessor {
 
@@ -40,7 +40,7 @@ public class RemoveDigitalFilterProcessor extends AbstractScanProcessor implemen
 
 		IProcessingInfo processingInfo = validate(scanNMR, processorSettings);
 		if(!processingInfo.hasErrorMessages()) {
-			FourierTransformationSettings settings = (FourierTransformationSettings)processorSettings;
+			RemoveDigitalFilterSettings settings = (RemoveDigitalFilterSettings)processorSettings;
 			Complex[] signalWithoutFilter = removeFilter(scanNMR, settings);
 			double[] timeScale = generateTimeScale(scanNMR);
 			for(int i = 0; i < signalWithoutFilter.length; i++) {
@@ -63,7 +63,7 @@ public class RemoveDigitalFilterProcessor extends AbstractScanProcessor implemen
 		return chemicalShiftAxis;
 	}
 
-	private Complex[] removeFilter(IScanNMR scanNMR, FourierTransformationSettings processorSettings) {
+	private Complex[] removeFilter(IScanNMR scanNMR, RemoveDigitalFilterSettings processorSettings) {
 
 		/*
 		 * Raw Data
